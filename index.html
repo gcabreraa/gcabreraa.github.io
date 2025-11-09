@@ -119,11 +119,79 @@
     section { display:none; }
     section:target, section.default { display:block; }
 
+    /* Themes: switch by setting <body class="theme-blue"> or <body class="theme-rose"> */
+    .theme-blue { /* Win98-ish blue, mint text */
+      --bg: #2e5d8c;      /* desktop blue */
+      --panel: #2b4f77;   /* window */
+      --panel-2: #274766; /* darker */
+      --text: #93cba5;    /* mint fg */
+      --muted: #cde6d6;   /* soft mint */
+      --accent: #239BA7;  /* teal highlights */
+      --accent-2: #E1AA36;/* mustard */
+      --frame: #1a3756;
+      --border: #264b6d;
+      --link: #7ADAA5;
+    }
+    .theme-rose { /* rose-pine-ish (link you sent) */
+      --bg: #191724;      /* base */
+      --panel: #1f1d2e;
+      --panel-2: #26233a;
+      --text: #e0def4;    /* foam */
+      --muted: #908caa;   /* muted */
+      --accent: #9ccfd8;  /* pine */
+      --accent-2: #f6c177;/* gold */
+      --frame: #2a2740;
+      --border: #34304c;
+      --link: #9ccfd8;
+    }
+
+    /* Sidebar icons (click-through to sections) */
+    .sidebar {
+      position: fixed; left: 10px; top: 70px; z-index: 60; display:flex; flex-direction:column; gap:.6rem;
+    }
+    .side-icon { width: 52px; height: 52px; border:1px solid var(--frame); background: var(--panel); border-radius:8px; box-shadow: 0 3px 0 0 var(--frame); display:flex; align-items:center; justify-content:center; }
+    .side-icon img { max-width:80%; max-height:80%; image-rendering: pixelated; }
+    .side-icon:active { transform: translateY(1px); box-shadow: 0 2px 0 0 var(--frame); }
+
+    /* Desktop decorations (retro card game + CD player in background) */
+    .decor { position: fixed; inset: 0; pointer-events:none; z-index: 0; }
+    .bg-window { position:absolute; border:1px solid var(--frame); background: var(--panel); box-shadow: 0 14px 40px -28px var(--shadow), inset 0 0 0 1px var(--border); border-radius:6px; opacity:.28; }
+    .bg-title { height: 22px; background: linear-gradient(180deg, var(--frame), var(--panel)); border-bottom:1px solid var(--frame); font-size:.8rem; color: var(--text); display:flex; align-items:center; padding:0 .4rem; opacity:.9; }
+    .bg-body { padding:.25rem; }
+    .bg-window img { width:100%; height:auto; display:block; image-rendering: pixelated; }
+
     /* Subtle scanline effect */
     .scanlines { position:fixed; inset:0; pointer-events:none; background: repeating-linear-gradient( to bottom, rgba(255,255,255,.03), rgba(255,255,255,.03) 1px, rgba(0,0,0,0) 3px, rgba(0,0,0,0) 4px ); mix-blend-mode: overlay; opacity:.4; }
   </style>
 </head>
-<body>
+<body class="theme-blue">
+  <!-- ===== Sidebar icons (replace src paths) =====
+       Put your PNG/GIF icons into /icons and update the src values below. -->
+  <aside class="sidebar" aria-label="Sidebar">
+    <a class="side-icon" href="#home" title="Home"><img src="icons/INSERT-HOME.png" alt="Home"/></a>
+    <a class="side-icon" href="#about" title="About"><img src="icons/INSERT-ABOUT.png" alt="About"/></a>
+    <a class="side-icon" href="#projects" title="Projects"><img src="icons/INSERT-PROJECTS.png" alt="Projects"/></a>
+    <a class="side-icon" href="#experience" title="Experience"><img src="icons/INSERT-EXPERIENCE.png" alt="Experience"/></a>
+    <a class="side-icon" href="#contact" title="Contact"><img src="icons/INSERT-CONTACT.png" alt="Contact"/></a>
+  </aside>
+
+  <!-- ===== Decorative background windows =====
+       Replace image src with your assets under /backgrounds 
+       Example files to add:
+       - /backgrounds/INSERT-CARD-GAME.png (a solitaire/similar screenshot)
+       - /backgrounds/INSERT-CD-PLAYER.png (Winamp/CD player UI)
+  -->
+  <div class="decor" aria-hidden>
+    <div class="bg-window" style="left: 120px; top: 120px; width: 420px;">
+      <div class="bg-title">Card Game</div>
+      <div class="bg-body"><img src="backgrounds/INSERT-CARD-GAME.png" alt="Retro card game"/></div>
+    </div>
+    <div class="bg-window" style="right: 60px; bottom: 80px; width: 360px;">
+      <div class="bg-title">CD Player</div>
+      <div class="bg-body"><img src="backgrounds/INSERT-CD-PLAYER.png" alt="Retro CD player"/></div>
+    </div>
+  </div>
+
   <div class="topbar" role="navigation">
     <div class="brand" title="Desktop">
       <span class="cube" aria-hidden></span>
@@ -311,7 +379,7 @@
       </div>
     </section>
 
-    <p class="footer">© <span id="year"></span> Giuliana Cabrera · Built with a sprinkle of retro ☼</p>
+    <p class="footer">© <span id="year"></span> Giuliana Cabrera · Built with a sprinkle of retro ☼ · Theme: <code>theme-blue</code> (change on &lt;body&gt;)</p>
   </main>
 
   <div class="scanlines" aria-hidden></div>
