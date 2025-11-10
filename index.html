@@ -32,6 +32,35 @@
       -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
       cursor: url(https://cur.cursors-4u.net/anime/ani-10/ani979.png) 2 2, auto;
     }
+    
+    html, body {
+      height: 100%;
+      overflow: hidden;
+    }
+    
+    .main-workarea {
+      position: relative;
+      max-width: 880px;         /* smaller than before so bg shows */
+      height: calc(100vh - 110px); /* topbar + taskbar + breathing room */
+      margin: 18px auto 56px;   /* center on page */
+    }
+      
+      /* The single app window */
+      .window.app {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        max-width: 100%;
+        margin: 0 auto;
+      }
+      
+      /* The content area scrolls INSIDE the window */
+      .window.app .content {
+        padding: 1rem;
+        overflow: auto;
+        height: 100%;
+      }
+
     body {
       margin: 0; background: var(--bg); color: var(--text);
       font-family: 'Fira Code', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
@@ -69,17 +98,33 @@
       border: 1px solid var(--frame); border-radius: .6rem; overflow: hidden;
       box-shadow: 0 16px 40px -24px var(--shadow), inset 0 0 0 1px var(--border);
     }
+    /* place title to the RIGHT, just before the buttons */
     .titlebar {
-      display:flex; align-items:center; justify-content:space-between;
-      padding: .25rem .4rem; background: linear-gradient(180deg, #1a3a3d, #132c2f);
-      border-bottom:1px solid var(--frame);
-      position: relative; height: 30px;
-    }
-    .win-controls { display:flex; gap:2px; margin-left:auto; }
-    .win-btn { width: 26px; height: 20px; line-height:18px; font-size:.85rem; color: var(--text);
-      background: #0f2628; border: 1px solid #3b5f63; border-radius: 2px; box-shadow: inset 1px 1px 0 #0a191a, 1px 1px 0 0 #061012; cursor:pointer; }
-    .win-btn:hover { background:#143236; }
-    .win-btn.close { color:#1b0a00; background: var(--accent-2); border-color: #a07112; box-shadow: inset 1px 1px 0 #f7d384, 1px 1px 0 0 #061012; }
+        display: flex; align-items: center;
+        background: linear-gradient(180deg, #c3c7cb, #9aa1a8);
+        color: #1b1f23; height: 32px;
+        border-bottom: 1px solid var(--frame);
+        padding: 0 .4rem;
+      }
+
+    .titlebar .title {
+        margin-left: auto;         /* pushes title to the right edge */
+        font-weight: 700;
+        letter-spacing: .2px;
+        text-align: right;
+        white-space: nowrap;
+      }
+    
+    /* and the window buttons at the far right */
+    .win-controls { display: flex; gap: 2px; margin-left: 8px; }
+    .win-btn {
+        width: 26px; height: 20px; line-height: 18px; font-size: .85rem;
+        color: #111; background: #d6d9dd; border: 1px solid #6c737a; border-radius: 2px;
+        box-shadow: inset 1px 1px 0 #f0f2f5, 1px 1px 0 #6a7077;
+        cursor: pointer;
+      }
+    .win-btn:hover { filter: brightness(0.95); }
+    .win-btn.close { background: #E1AA36; border-color: #a07112; }
     .win-btn.close:hover { filter: brightness(0.95); }
     .title { color: var(--muted); font-size: .9rem; padding-left:.3rem; }
 
@@ -123,10 +168,6 @@
 
     .footer { text-align:center; color:var(--muted); font-size:.9rem; padding:2rem 1rem; }
 
-    /* Hash routing: show the requested section */
-    section { display:none; }
-    section:target, section.default { display:block; }
-
     /* Themes: switch by setting <body class="theme-blue"> or <body class="theme-rose"> */
     .theme-blue { /* Win98-ish blue, mint text */
       --bg: #2e5d8c;      /* desktop blue */
@@ -154,18 +195,14 @@
     }
 
     /* Sidebar icons (click-through to sections) */
-    .sidebar {
-      position: fixed; left: 10px; top: 70px; z-index: 60; display:flex; flex-direction:column; gap:.6rem; align-items:center;
-    }
-    .side-icon { width: 72px; height: auto; display:flex; flex-direction:column; align-items:center; justify-content:flex-start; text-decoration:none; background: transparent; border:none; box-shadow:none; }
-    .side-icon .imgwrap { display:flex; align-items:center; justify-content:center; width:62px; height:62px; }
+    .sidebar { position: fixed; left: 10px; top: 70px; z-index: 60; display:flex; flex-direction:column; gap:.6rem; align-items:center; }
+    .side-icon { width: 72px; height: auto; display:flex; flex-direction:column; align-items:center; text-decoration:none; background: transparent; border: 0; box-shadow: none; }
+    .side-icon .imgwrap { width: 62px; height: 62px; display:flex; align-items:center; justify-content:center; }
     .side-icon .imgwrap img { max-width:100%; max-height:100%; image-rendering: pixelated; }
-    /* handled by .imgwrap img */
-    .side-label { display:block; font-size:.72rem; color: var(--text); margin-top:.35rem; text-align:center; opacity:.95; }
-    /* remove press effect for floating icons */
-    /* removed old sidebar boxed style */
-    /* handled by .imgwrap img */
-    /* remove press effect for floating icons */
+    .side-label { margin-top:.35rem; font-size:.72rem; color: var(--text); text-align:center; opacity:.95; }
+
+    .template { display: none !important; }
+
 
     /* Desktop decorations (retro card game + CD player in background) */
     .decor { position: fixed; inset: 0; pointer-events:none; z-index: 0; }
@@ -268,40 +305,41 @@
     </nav>
   </div>
 
-  <main>
-    <!-- HOME / INTRO -->
-    <div class="window" id="home">
-      <div class="titlebar">
-        <div class="win-controls" aria-label="Window controls">
-          <button class="win-btn minimize" title="Minimize" aria-label="Minimize">_</button>
-          <button class="win-btn maximize" title="Maximize" aria-label="Maximize">□</button>
-          <button class="win-btn close" title="Close" aria-label="Close">×</button>
-        </div>
-        <div class="title">terminal — intro.log</div>
-      </div>
-      <div class="content">
-        <h1 style="font-family:'Monoton', cursive; font-size:2.2rem; letter-spacing:.5px; color:var(--accent-2); text-shadow:0 2px 0 #00000055; margin-bottom:.4rem;">Welcome to gpcs@portfolio</h1>
-        <p>I build end‑to‑end systems: from firmware and FPGA logic to thoughtful UX. This site is a retro desktop—use the icons on the left or the commands below.</p>
-        <pre class="terminal" aria-label="Terminal">
-<span class="prompt">gpcs@portfolio:~$</span> ls
-./about  ./projects  ./experience  ./contact
-<span class="prompt">gpcs@portfolio:~$</span> open ./projects
-<span class="prompt">→</span> <a href="#projects">#projects</a>
-        </pre>
+  <main class="main-workarea">
+  <!-- Single app window that stays centered -->
+  <div class="window app" id="app-window">
+    <div class="titlebar">
+      <div class="title" id="app-title">terminal — intro.log</div>
+      <div class="win-controls" aria-label="Window controls">
+        <button class="win-btn minimize" title="Minimize" aria-label="Minimize">_</button>
+        <button class="win-btn maximize" title="Maximize" aria-label="Maximize">□</button>
+        <button class="win-btn close" title="Close" aria-label="Close">×</button>
       </div>
     </div>
+    <div class="content" id="app-content"><!-- JS renders here --></div>
+  </div>
 
-    <!-- ABOUT -->
-    <section id="about" class="window">
-      <div class="titlebar">
-        <div class="win-controls" aria-label="Window controls">
-          <button class="win-btn minimize" title="Minimize" aria-label="Minimize">_</button>
-          <button class="win-btn maximize" title="Maximize" aria-label="Maximize">□</button>
-          <button class="win-btn close" title="Close" aria-label="Close">×</button>
-        </div>
-        <div class="title">about.sys — profile & education</div>
-      </div>
-      <div class="content grid cols-2">
+  <!-- Hidden templates (store your page content here) -->
+
+  <!-- HOME / INTRO -->
+  <section id="home" class="template default">
+    <div class="content">
+      <h1 style="font-family:'Monoton', cursive; font-size:2.2rem; letter-spacing:.5px; color:var(--accent-2); text-shadow:0 2px 0 #00000055; margin-bottom:.4rem;">Welcome to gpcs@portfolio</h1>
+      <p>I build end-to-end systems: from firmware and FPGA logic to thoughtful UX. This site is a retro desktop—use the icons on the left or the commands below.</p>
+      <pre class="terminal" aria-label="Terminal">
+  <span class="prompt">gpcs@portfolio:~$</span> ls
+  ./about  ./projects  ./experience  ./contact
+  <span class="prompt">gpcs@portfolio:~$</span> open ./projects
+  <span class="prompt">→</span> <a href="#projects">#projects</a>
+      </pre>
+    </div>
+    <div class="meta" data-title="terminal — intro.log"></div>
+  </section>
+
+
+  <!-- ABOUT -->
+  <section id="about" class="template">
+    <div class="content grid cols-2">
         <div class="card">
           <h2>About</h2>
           <p>I’m a hardware‑software generalist with a focus on embedded systems, energy‑aware computing (DVFS on HPC), and community‑oriented design.</p>
@@ -315,21 +353,14 @@
             <li>Queen’s University Belfast — Visiting Researcher (HPC DVFS)</li>
           </ul>
           <p><a href="#projects">See projects</a> or grab the <a href="#contact">résumé link</a>.</p>
-        </div>
+        </div>    
       </div>
-    </section>
+    <div class="meta" data-title="about.sys — profile & education"></div>
+  </section>
 
-    <!-- PROJECTS -->
-    <section id="projects" class="window">
-      <div class="titlebar">
-        <div class="win-controls" aria-label="Window controls">
-          <button class="win-btn minimize" title="Minimize" aria-label="Minimize">_</button>
-          <button class="win-btn maximize" title="Maximize" aria-label="Maximize">□</button>
-          <button class="win-btn close" title="Close" aria-label="Close">×</button>
-        </div>
-        <div class="title">projects.fs — selected work</div>
-      </div>
-      <div class="content">
+  <!-- PROJECTS -->
+  <section id="projects" class="template">
+    <div class="content">
         <div class="grid cols-2">
           <article class="card">
             <h3>MITOS — Campus Heat Monitor</h3>
@@ -364,19 +395,12 @@
             <p><a href="https://github.com/" target="_blank" rel="noreferrer noopener">Overview</a></p>
           </article>
         </div>
-      </div>
-    </section>
+    </div>
+    <div class="meta" data-title="projects.fs — selected work"></div>
+  </section>
 
-    <!-- EXPERIENCE -->
-    <section id="experience" class="window">
-      <div class="titlebar">
-        <div class="win-controls" aria-label="Window controls">
-          <button class="win-btn minimize" title="Minimize" aria-label="Minimize">_</button>
-          <button class="win-btn maximize" title="Maximize" aria-label="Maximize">□</button>
-          <button class="win-btn close" title="Close" aria-label="Close">×</button>
-        </div>
-        <div class="title">experience.db — roles</div>
-      </div>
+  <!-- EXPERIENCE -->
+  <section id="experience" class="template">
       <div class="content">
         <div class="card">
           <h2>Experience</h2>
@@ -388,42 +412,30 @@
           </ul>
         </div>
       </div>
-    </section>
+    <div class="meta" data-title="experience.db — roles"></div>
+  </section>
 
-    <!-- CONTACT -->
-    <section id="contact" class="window">
-      <div class="titlebar">
-        <div class="win-controls" aria-label="Window controls">
-          <button class="win-btn minimize" title="Minimize" aria-label="Minimize">_</button>
-          <button class="win-btn maximize" title="Maximize" aria-label="Maximize">□</button>
-          <button class="win-btn close" title="Close" aria-label="Close">×</button>
-        </div>
-        <div class="title">contact.mail — reach out</div>
-      </div>
-      <div class="content grid cols-2">
+  <!-- CONTACT -->
+  <section id="contact" class="template">
+    <div class="content grid cols-2">
         <div class="card">
           <h2>Contact</h2>
           <p>Email: <a href="mailto:hello@giuliana.dev">hello@giuliana.dev</a> (example)</p>
           <p>LinkedIn: <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer noopener">/in/giuliana</a></p>
           <p>Résumé: <a href="#">PDF</a></p>
-        </div>
-        <div class="card">
-          <h2>PGP / Keys</h2>
-          <pre class="terminal">-----BEGIN PGP PUBLIC KEY BLOCK-----
-... (optional) ...
------END PGP PUBLIC KEY BLOCK-----</pre>
-        </div>
-      </div>
-    </section>
+        </div>    
+    </div>
+    <div class="meta" data-title="contact.mail — reach out"></div>
+  </section>
 
-    <p class="footer">© <span id="year"></span> Giuliana Cabrera · Built with a sprinkle of retro ☼ · Theme: <code>theme-blue</code> (change on &lt;body&gt;)</p>
-  </main>
+  <p class="footer">© <span id="year"></span> Giuliana Cabrera · Built with a sprinkle of retro ☼</p>
+</main>
 
   <div class="scanlines" aria-hidden></div>
 
   <!-- Bottom taskbar -->
   <div class="taskbar" role="contentinfo">
-    <button class="start" onclick="location.hash='#home'">★ Start</button>
+    <button class="start" onclick="navigate('#home')">★ Start</button>
     <div class="task-items">
       <div class="task">terminal — intro.log</div>
     </div>
@@ -431,38 +443,67 @@
       <span class="clock" id="clock">00:00</span>
     </div>
   </div>
+    
+    <script>
+      // Year
+      document.getElementById('year').textContent = new Date().getFullYear();
+    
+      // Clock (from earlier)
+      function updClock(){
+        const el = document.getElementById('clock'); if(!el) return;
+        const d = new Date(); const hh = String(d.getHours()).padStart(2,'0'); const mm = String(d.getMinutes()).padStart(2,'0');
+        el.textContent = hh + ':' + mm;
+      }
+      updClock(); setInterval(updClock, 10000);
+    
+      // Router: render template section into the app window
+      function render(id) {
+        const tpl = document.querySelector(id);
+        const appContent = document.getElementById('app-content');
+        const appTitle = document.getElementById('app-title');
+    
+        if (!tpl) return;
+    
+        // Copy inner .content HTML
+        const c = tpl.querySelector('.content');
+        appContent.innerHTML = c ? c.innerHTML : '(empty)';
+    
+        // Set title from .meta data-title
+        const meta = tpl.querySelector('.meta');
+        const title = meta?.dataset?.title || 'window';
+        appTitle.textContent = title;
+    
+        // Update task item text if you want
+        const task = document.querySelector('.task-items .task');
+        if (task) task.textContent = title;
+      }
+    
+      // Handle clicks on sidebar or any #hash link
+      function navigate(hash) {
+        if (!hash) hash = '#home';
+        history.replaceState(null, '', hash);
+        render(hash);
+      }
+    
+      // Intercept internal links
+      document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', e => {
+          e.preventDefault();
+          navigate(a.getAttribute('href'));
+        });
+      });
+    
+      // Keyboard shortcuts (g = go): ga, gp, ge, gc, gh
+      const map = { a:'#about', p:'#projects', e:'#experience', c:'#contact', h:'#home' };
+      window.addEventListener('keydown', (e)=>{
+        if((e.ctrlKey||e.metaKey) && e.key.toLowerCase() === 'k'){ e.preventDefault(); navigate('#home'); return; }
+        if(e.key.toLowerCase() === 'g') { window._gPressed = true; setTimeout(()=>window._gPressed=false, 800); }
+        else if(window._gPressed && map[e.key.toLowerCase()]) { navigate(map[e.key.toLowerCase()]); window._gPressed=false; }
+      });
+    
+      // Initial render
+      navigate(location.hash || '#home');
+    </script>
 
-  <script>
-    // Update year
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Taskbar clock
-    function updClock(){
-      const el = document.getElementById('clock'); if(!el) return;
-      const d = new Date();
-      const hh = String(d.getHours()).padStart(2,'0');
-      const mm = String(d.getMinutes()).padStart(2,'0');
-      el.textContent = hh + ':' + mm;
-    }
-    updClock(); setInterval(updClock, 10000);
-
-    // Hash routing default: if no hash, show home
-    function ensureHash(){ if(!location.hash) location.hash = '#home'; }
-    ensureHash();
-
-    // Keyboard shortcuts (g = go): ga, gp, ge, gc, gh
-    const map = { a:'#about', p:'#projects', e:'#experience', c:'#contact', h:'#home' };
-    window.addEventListener('keydown', (e)=>{
-      if((e.ctrlKey||e.metaKey) && e.key.toLowerCase() === 'k'){ e.preventDefault(); location.hash = '#home'; return; }
-      if(e.key.toLowerCase() === 'g') { window._gPressed = true; setTimeout(()=>window._gPressed=false, 800); }
-      else if(window._gPressed && map[e.key.toLowerCase()]) { location.hash = map[e.key.toLowerCase()]; window._gPressed=false; }
-    });
-
-    // Enhance internal links to act like commands in terminal
-    document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', () => {
-      // brief focus effect
-      document.activeElement && document.activeElement.blur();
-    }));
-  </script>
 </body>
 </html>
