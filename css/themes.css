@@ -1,0 +1,42 @@
+/* Themes: switch by setting <body class="theme-blue"> or <body class="theme-rose"> */
+    .theme-blue { /* Win98-ish blue, mint text */
+      --bg: #2e5d8c;      /* desktop blue */
+      --panel: #2b4f77;   /* window */
+      --panel-2: #274766; /* darker */
+      --text: #93cba5;    /* mint fg */
+      --muted: #cde6d6;   /* soft mint */
+      --accent: #239BA7;  /* teal highlights */
+      --accent-2: #E1AA36;/* mustard */
+      --frame: #1a3756;
+      --border: #264b6d;
+      --link: #7ADAA5;
+    }
+    .theme-rose { /* rose-pine-ish (link you sent) */
+      --bg: #191724;      /* base */
+      --panel: #1f1d2e;
+      --panel-2: #26233a;
+      --text: #e0def4;    /* foam */
+      --muted: #908caa;   /* muted */
+      --accent: #9ccfd8;  /* pine */
+      --accent-2: #f6c177;/* gold */
+      --frame: #2a2740;
+      --border: #34304c;
+      --link: #9ccfd8;
+    }
+
+    /* --- PIXEL/Binbows palette --- */
+    .theme-pixel{
+      --bg:#1185d9;        /* desktop blue */
+      --panel:#3d71b0;     /* window */
+      --panel-2:#577fae;   /* darker window */
+      --text:#f3e9ff;      /* light text */
+      --muted:#bfadf3;
+      --accent:#ff7bd8;    /* pink highlight */
+      --accent-2:#6f47ff;  /* purple button/accent */
+        --frame:#082c63;     /* bezel */
+        --border:#0a3f85;    /* borders */
+        --link:#b3f6ff;      /* links */
+
+        --tab-top:#7b5cff;
+        --tab-bot:#4f38cc;
+    }

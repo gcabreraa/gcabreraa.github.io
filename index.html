@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+  
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -8,273 +9,14 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=Pacifico&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Monoton&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      /* === Giuliana's retro palette ===
-         Mint: #7ADAA5 | Teal: #239BA7 | Cream: #ECECBB | Mustard: #E1AA36 */
-      --bg: #0e2122;            /* dark teal base to keep terminal feel */
-      --panel: #112a2c;         /* window background */
-      --panel-2: #0e2223;       /* darker panel */
-      --text: #ECECBB;          /* cream text */
-      --muted: #bfc8a9;         /* muted cream */
-      --accent: #239BA7;        /* teal */
-      --accent-2: #E1AA36;      /* mustard */
-      --frame: #1a3a3d;         /* bezel */
-      --border: #214b4f;        /* borders */
-      --link: #7ADAA5;          /* mint links */
-      --shadow: rgba(0,0,0,.55);
-    }
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/themes.css">
+  <link rel="stylesheet" href="css/layout.css">
 
-    * { box-sizing: border-box; }
-    html, body {
-      margin: 0; background: var(--bg); color: var(--text);
-      font-family: 'Fira Code', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
-      cursor: url(https://cur.cursors-4u.net/anime/ani-10/ani979.png) 2 2, auto;
-    }
-    
-    html, body {
-      height: 100%;
-      overflow: hidden;
-    }
-    
-    .main-workarea {
-      position: relative;
-      max-width: 720px;         /* smaller than before so bg shows */
-      height: calc(100vh - 120px); /* topbar + taskbar + breathing room */
-      margin: 18px auto 56px;   /* center on page */
-    }
-      
-      /* The single app window */
-      .window.app {
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-        max-width: 100%;
-        margin: 0 auto;
-        border-radius:0;
-      }
-      
-      /* The content area scrolls INSIDE the window */
-      .window.app .content {
-        padding: 1rem;
-        overflow: auto;
-        height: 100%;
-      }
-
-    body {
-      margin: 0; background: var(--bg); color: var(--text);
-      font-family: 'Fira Code', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
-    }
-
-    /* Desktop dock/toolbar */
-    .topbar {
-      position: sticky; top: 0; z-index: 50;
-      display: flex; gap: .75rem; align-items: center; justify-content: space-between;
-      padding: .5rem .75rem; background: linear-gradient(0deg, var(--panel), var(--panel-2));
-      border-bottom: 1px solid var(--border);
-      box-shadow: 0 10px 18px -12px var(--shadow);
-
-    }
-    .brand { display:flex; align-items:center; gap:.5rem; font-weight:700; letter-spacing:.3px; }
-    .brand .cube { width: 18px; height: 18px; background: var(--accent); box-shadow: 8px 8px 0 0 var(--accent-2); }
-
-    .dock { display:none; } /* hide topbar dock; use sidebar instead */
-    .icon {
-      display:inline-flex; align-items:center; gap:.5rem; padding:.4rem .6rem;
-      border:1px solid var(--border); background: var(--panel);
-      color: var(--text); text-decoration:none; border-radius: .4rem;
-      transition: transform .08s ease, box-shadow .12s ease, background .12s ease;
-      box-shadow: 0 2px 0 0 var(--frame);
-      font-size: .95rem;
-    }
-    .icon:hover { transform: translateY(-1px); box-shadow: 0 3px 0 0 var(--frame); background: #0f171a; }
-    .icon:active { transform: translateY(0); box-shadow: 0 1px 0 0 var(--frame); }
-    .icon svg { width: 16px; height: 16px; }
-
-      .ticker{
-  position:relative; overflow:hidden; width: 360px; height: 18px; /* adjust */
-}
-.ticker__track{
-  position:absolute; white-space:nowrap;
-  animation: marquee 16s linear infinite;
-  opacity:.95;
-}
-@keyframes marquee{
-  from{ transform: translateX(0); }
-  to  { transform: translateX(-50%); } /* track string is repeated */
-}
-
-
-    /* Window */
-    .window {
-      max-width: 720px; margin: 1.2rem auto; background: var(--panel);
-      border: 1px solid var(--frame); border-radius: .0rem; overflow: hidden;
-      box-shadow: 0 16px 40px -24px var(--shadow), inset 0 0 0 1px var(--border);
-    }
-    /* place title to the RIGHT, just before the buttons */
-
-    .titlebar{
-      display:flex; align-items:center;
-      background: linear-gradient(180deg, #c3c7cb, #9aa1a8);
-      border-bottom:1px solid var(--frame);
-      height:32px; padding:0 .4rem;
-      font-size:11px; line-height:1;         /* tighter */
-    }
-    
-    .titlebar .title{
-      margin-left:0; margin-right:auto;      /* << left align */
-      font-weight:700; white-space:nowrap;
-    }
-    
-    .titlebar, .win-controls, .taskbar, .side-label { font-family:'Press Start 2P', monospace; font-size:10px } /* or .ui-pixel class */
-
-    /* pixel UI font for titlebars, taskbar, labels */
-        .ui-pixel { font-family: 'Press Start 2P', monospace; letter-spacing:0; }
-        
-        /* terminal text still mono; you can swap to VT323 for chunkier CRT */
-        .terminal, pre, code { font-family:'VT323','Fira Code',monospace; font-size:20px; }
-        
-        /* cursive hero title */
-        .hero-cursive { font-family:'Pacifico', cursive; }
-
-        /* and the window buttons at the far right */
-        .win-controls { display: flex; gap: 2px; margin-left: 8px; }
-        .win-btn {
-        width: 26px; height: 20px; line-height: 18px; font-size: .85rem;
-        color: #111; background: #d6d9dd; border: 1px solid #6c737a; border-radius: 2px;
-        box-shadow: inset 1px 1px 0 #f0f2f5, 1px 1px 0 #6a7077;
-        cursor: pointer;
-      }
-    .win-btn:hover { filter: brightness(0.95); }
-    .win-btn.close { background: #E1AA36; border-color: #a07112; }
-    .win-btn.close:hover { filter: brightness(0.95); }
-    .title { color: var(--muted); font-size: .9rem; padding-left:.3rem; }
-
-    .content { padding: 1rem; }
-
-    pre.terminal {
-      background: #0b1c1c; color: #bff3c9; border: 1px solid var(--border);
-      border-radius:.5rem; padding: .9rem; overflow:auto; position:relative;
-      box-shadow: inset 0 0 0 1px #082a22;
-      text-shadow: 0 0 2px rgba(122, 218, 165, .35);
-    }
-    .prompt { color: var(--accent-2); }
-    code.kbd { background: #0e1515; padding: .15rem .35rem; border-radius:.3rem; border:1px solid var(--border); }
-
-    h1,h2,h3 { margin: .2rem 0 .6rem 0; }
-    h1 { font-size: 1.8rem; }
-    h2 { font-size: 1.35rem; color: var(--accent-2); }
-    h3 { font-size: 1.08rem; color: var(--link); }
-    p { margin: .3rem 0 .9rem; }
-
-    .grid { display:grid; gap: .9rem; }
-    @media(min-width: 820px){ .grid.cols-2 { grid-template-columns: 1fr 1fr; } }
-
-    .card {
-      border: 1px solid var(--border); border-radius:.5rem; padding: .9rem;
-      background: linear-gradient(180deg, var(--panel), var(--panel-2));
-      box-shadow: inset 0 0 0 1px var(--frame);
-    }
-
-    /* Project icons (optional Y2K/Bratz style) */
-    .card.project .proj-head { display:flex; align-items:center; gap:.6rem; margin-bottom:.4rem; }
-    .proj-icon { width: 28px; height: 28px; border-radius:6px; border:1px solid var(--frame); box-shadow: 0 2px 0 0 var(--frame); image-rendering: pixelated; }
-    .y2k { filter: saturate(1.1) contrast(1.05); }
-
-    
-    a, button, [role="button"] {
-      cursor: url(https://cur.cursors-4u.net/anime/ani-10/ani977.png) 2 2, pointer;
-    }
-
-    .pill { display:inline-block; padding:.15rem .5rem; border:1px solid var(--border); border-radius:999px; margin-right:.3rem; font-size:.85rem; color:var(--muted); }
-
-    .footer { text-align:center; color:var(--muted); font-size:.9rem; padding:2rem 1rem; }
-
-    /* Themes: switch by setting <body class="theme-blue"> or <body class="theme-rose"> */
-    .theme-blue { /* Win98-ish blue, mint text */
-      --bg: #2e5d8c;      /* desktop blue */
-      --panel: #2b4f77;   /* window */
-      --panel-2: #274766; /* darker */
-      --text: #93cba5;    /* mint fg */
-      --muted: #cde6d6;   /* soft mint */
-      --accent: #239BA7;  /* teal highlights */
-      --accent-2: #E1AA36;/* mustard */
-      --frame: #1a3756;
-      --border: #264b6d;
-      --link: #7ADAA5;
-    }
-    .theme-rose { /* rose-pine-ish (link you sent) */
-      --bg: #191724;      /* base */
-      --panel: #1f1d2e;
-      --panel-2: #26233a;
-      --text: #e0def4;    /* foam */
-      --muted: #908caa;   /* muted */
-      --accent: #9ccfd8;  /* pine */
-      --accent-2: #f6c177;/* gold */
-      --frame: #2a2740;
-      --border: #34304c;
-      --link: #9ccfd8;
-    }
-
-    /* --- PIXEL/Binbows palette --- */
-    .theme-pixel{
-      --bg:#1185d9;        /* desktop blue */
-      --panel:#0e4f9e;     /* window */
-      --panel-2:#0c3f7a;   /* darker window */
-      --text:#f3e9ff;      /* light text */
-      --muted:#cdbff2;
-      --accent:#ff7bd8;    /* pink highlight */
-      --accent-2:#6f47ff;  /* purple button/accent */
-      --frame:#082c63;     /* bezel */
-      --border:#0a3f85;    /* borders */
-      --link:#b3f6ff;      /* links */
-    }
-
-
-    /* Sidebar icons (click-through to sections) */
-    .sidebar { position: fixed; left: 10px; top: 70px; z-index: 60; display:flex; flex-direction:column; gap:.6rem; align-items:center; }
-    .side-icon { width: 65px; height: auto; display:flex; flex-direction:column; align-items:center; text-decoration:none; background: transparent; border: 0; box-shadow: none; }
-    .side-icon .imgwrap { width: 65px; height: 65px; display:flex; align-items:center; justify-content:center; }
-    .side-icon .imgwrap img { max-width:100%; max-height:100%; image-rendering: pixelated; }
-    .side-label { margin-top:.35rem; font-size:.72rem; color: var(--text); text-align:center; opacity:.95; }
-
-    .template { display: none !important; }
-
-    .win-btn{ background:#d6d9dd; border:1px solid #6c737a; }
-    .win-btn.close{ background: var(--accent-2); color:#140a33; border-color:#3c2c99; }
-
-    /* Desktop decorations (retro card game + CD player in background) */
-    .decor { z-index:0; opacity:.85; }
-    .bg-window{
-      position: absolute;
-      border:1px solid var(--frame);
-      background: var(--panel);
-      box-shadow: 0 14px 40px -28px var(--shadow), inset 0 0 0 1px var(--border);
-      border-radius:0;                   /* square corners */
-      opacity:.90;                       /* faint, behind the app */
-      filter: blur(0.3px) saturate(0.95);
-    }
-    .bg-title{ height:22px; background:linear-gradient(180deg, var(--frame), var(--panel)); border-bottom:1px solid var(--frame); font-size:.8rem; color:var(--text); display:flex; align-items:center; padding:0 .4rem; opacity:.9; }
-    .bg-body{ padding:.25rem; }
-    .bg-window img{ width:100%; height:auto; display:block; image-rendering:pixelated; }
-
-    /* Subtle scanline effect */
-    .scanlines { position:fixed; inset:0; pointer-events:none; background: repeating-linear-gradient( to bottom, rgba(255,255,255,.03), rgba(255,255,255,.03) 1px, rgba(0,0,0,0) 3px, rgba(0,0,0,0) 4px ); mix-blend-mode: overlay; opacity:.4; }
-
-    /* Bottom taskbar */
-    .taskbar { position:fixed; left:0; right:0; bottom:0; height:34px; display:flex; align-items:center; gap:.5rem; padding:0 .5rem; background: linear-gradient(180deg, #1a3756, #0f2741); border-top:1px solid var(--frame); z-index:70; }
-    .start { display:flex; align-items:center; gap:.4rem; padding:.15rem .6rem; background:#2b4f77; color:var(--text); border:1px solid #264b6d; border-radius:4px; font-weight:700; cursor:pointer; }
-    .task-items { display:flex; gap:.4rem; flex:1; }
-    .task { display:flex; align-items:center; gap:.35rem; padding:.1rem .5rem; background:var(--panel); border:1px solid var(--border); border-radius:4px; min-width:100px; color:var(--text); }
-    .tray { margin-left:auto; display:flex; align-items:center; gap:.7rem; color:var(--text); opacity:.9; }
-    .clock { min-width:70px; text-align:right; }
-  </style>
 </head>
+
 <body class="theme-pixel">
+
   <!-- ===== Sidebar icons (replace src paths) =====
        Put your PNG/GIF icons into /icons and update the src values below. -->
   <aside class="sidebar" aria-label="Sidebar">
@@ -300,12 +42,6 @@
     </a>
   </aside>
 
-  <!-- ===== Decorative background windows =====
-       Replace image src with your assets under /backgrounds 
-       Example files to add:
-       - /backgrounds/INSERT-CARD-GAME.png (a solitaire/similar screenshot)
-       - /backgrounds/INSERT-CD-PLAYER.png (Winamp/CD player UI)
-  -->
   <div class="decor" aria-hidden>
       <div class="bg-window" style="right: 60px; bottom: 80px; width: 360px; z-index:1;">
       <div class="bg-title">Card Game</div>
@@ -344,117 +80,21 @@
     <div class="content" id="app-content"><!-- JS renders here --></div>
   </div>
 
-  <!-- Hidden templates (store your page content here) -->
-
   <!-- HOME / INTRO -->
-  <section id="home" class="template default">
-    <div class="content">
-<h1 class="hero-cursive" style="font-size:2.3rem; color:var(--accent); text-shadow:0 2px 0 #00000055; margin:.25rem 0 .5rem;">
-  Welcome to my portfolio
-</h1>
-      <p style="margin-top:.2rem;">Welcome to <span style="font-family:'VT323', monospace; font-size:1.1em;">gpcs@portfolio</span> — use the desktop icons or the commands below.</p>
-      <p>Hi! My name is Giuliana. I build end-to-end systems: from firmware and FPGA logic to thoughtful UX. This site is a retro desktop—use the icons on the left or the commands below.</p>
-      <pre class="terminal" aria-label="Terminal">
-  <span class="prompt">gpcs@portfolio:~$</span> ls
-  ./about  ./projects  ./experience  ./contact
-  <span class="prompt">gpcs@portfolio:~$</span> open ./projects
-  <span class="prompt">→</span> <a href="#projects">#projects</a>
-      </pre>
-    </div>
-    <div class="meta" data-title="terminal — intro.log"></div>
-  </section>
-
+  <section id="home" class="template default" data-src="templates/home.html"></section>
 
   <!-- ABOUT -->
-  <section id="about" class="template">
-    <div class="content grid cols-2">
-        <div class="card">
-          <h2>About</h2>
-          <p>I’m a hardware‑software generalist with a focus on embedded systems, energy‑aware computing (DVFS on HPC), and community‑oriented design.</p>
-          <p>Previously: ESP32‑based environmental sensing (LoRa/Wi‑Fi, e‑ink), FPGA HDMI music game, desalination control software, and more.</p>
-          <p><strong>Interests:</strong> real‑time systems, performance counters, power/thermal telemetry, firmware, and UX for technical tools.</p>
-        </div>
-        <div class="card">
-          <h2>Education</h2>
-          <ul>
-            <li><strong>MIT — EECS</strong> (6‑2/6‑5), Cambridge, MA</li>
-            <li>Queen’s University Belfast — Visiting Researcher (HPC DVFS)</li>
-          </ul>
-          <p><a href="#projects">See projects</a> or grab the <a href="#contact">résumé link</a>.</p>
-        </div>    
-      </div>
-    <div class="meta" data-title="about.sys — profile & education"></div>
-  </section>
+  <section id="about" class="template" data-src="templates/about.html"></section>
 
   <!-- PROJECTS -->
-  <section id="projects" class="template">
-    <div class="content">
-        <div class="grid cols-2">
-          <article class="card">
-            <h3>MITOS — Campus Heat Monitor</h3>
-            <p>ESP32‑C3 + SHT4x + VEML7700 + e‑ink. RTC/flash buffering, LoRa/Wi‑Fi upload windows, partial refresh UI, QR telemetry.</p>
-            <p>
-              <span class="pill">ESP32</span><span class="pill">LoRa</span><span class="pill">E‑Ink</span><span class="pill">Low‑Power</span>
-            </p>
-            <p><a href="https://github.com/" target="_blank" rel="noreferrer noopener">Repo</a> · <a href="#">Demo</a></p>
-          </article>
-          <article class="card">
-            <h3>Grid‑thym — FPGA Music Game</h3>
-            <p>HDMI + SD‑card + BRAM + audio synthesis. Piano‑Tiles‑style gameplay with sprite/row dissolve and keyboard input.</p>
-            <p>
-              <span class="pill">FPGA</span><span class="pill">HDMI</span><span class="pill">SystemVerilog</span>
-            </p>
-            <p><a href="https://github.com/" target="_blank" rel="noreferrer noopener">Repo</a></p>
-          </article>
-          <article class="card">
-            <h3>URJA — DVFS Policy Experiments</h3>
-            <p>Centralized vs. decentralized policy daemons; PAPI counters + RAPL telemetry; Slurm plugin prototypes; IPC via FIFO/MQ/SHM.</p>
-            <p>
-              <span class="pill">HPC</span><span class="pill">DVFS</span><span class="pill">C/C++</span>
-            </p>
-            <p><a href="https://github.com/" target="_blank" rel="noreferrer noopener">Notes</a></p>
-          </article>
-          <article class="card">
-            <h3>Containerized Desalination Control</h3>
-            <p>Python drivers + control loops for a shipping‑container EDR/RO system. Sensor/actuator orchestration & data logging.</p>
-            <p>
-              <span class="pill">Python</span><span class="pill">Controls</span><span class="pill">IoT</span>
-            </p>
-            <p><a href="https://github.com/" target="_blank" rel="noreferrer noopener">Overview</a></p>
-          </article>
-        </div>
-    </div>
-    <div class="meta" data-title="projects.fs — selected work"></div>
-  </section>
+  <section id="projects" class="template" data-src="templates/projects.html"></section>
 
   <!-- EXPERIENCE -->
-  <section id="experience" class="template">
-      <div class="content">
-        <div class="card">
-          <h2>Experience</h2>
-          <ul>
-            <li><strong>QUB — HPC Researcher (DVFS)</strong>: policy daemons, perf telemetry, Slurm plugins.</li>
-            <li><strong>MIT D‑Lab — Research Assistant</strong>: desalination control software & field testing.</li>
-            <li><strong>GEAR Lab — UROP</strong>: embedded systems & measurement tooling.</li>
-            <li><strong>AXO — President</strong>: org operations, inclusive programming, events.</li>
-          </ul>
-        </div>
-      </div>
-    <div class="meta" data-title="experience.db — roles"></div>
-  </section>
+  <section id="experience" class="template" data-src="templates/experience.html"></section>
 
   <!-- CONTACT -->
-  <section id="contact" class="template">
-    <div class="content grid cols-2">
-        <div class="card">
-          <h2>Contact</h2>
-          <p>Email: <a href="mailto:hello@giuliana.dev">hello@giuliana.dev</a> (example)</p>
-          <p>LinkedIn: <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer noopener">/in/giuliana</a></p>
-          <p>Résumé: <a href="#">PDF</a></p>
-        </div>    
-    </div>
-    <div class="meta" data-title="contact.mail — reach out"></div>
-  </section>
+  <section id="contact" class="template" data-src="templates/contact.html"></section>
+
 
   <p class="footer">© <span id="year"></span> Giuliana Cabrera · Built with a sprinkle of retro ☼</p>
 </main>
@@ -471,67 +111,8 @@
       <span class="clock" id="clock">00:00</span>
     </div>
   </div>
-    
-    <script>
-      // Year
-      document.getElementById('year').textContent = new Date().getFullYear();
-    
-      // Clock (from earlier)
-      function updClock(){
-        const el = document.getElementById('clock'); if(!el) return;
-        const d = new Date(); const hh = String(d.getHours()).padStart(2,'0'); const mm = String(d.getMinutes()).padStart(2,'0');
-        el.textContent = hh + ':' + mm;
-      }
-      updClock(); setInterval(updClock, 10000);
-    
-      // Router: render template section into the app window
-      function render(id) {
-        const tpl = document.querySelector(id);
-        const appContent = document.getElementById('app-content');
-        const appTitle = document.getElementById('app-title');
-    
-        if (!tpl) return;
-    
-        // Copy inner .content HTML
-        const c = tpl.querySelector('.content');
-        appContent.innerHTML = c ? c.innerHTML : '(empty)';
-    
-        // Set title from .meta data-title
-        const meta = tpl.querySelector('.meta');
-        const title = meta?.dataset?.title || 'window';
-        appTitle.textContent = title;
-    
-        // Update task item text if you want
-        const task = document.querySelector('.task-items .task');
-        if (task) task.textContent = title;
-      }
-    
-      // Handle clicks on sidebar or any #hash link
-      function navigate(hash) {
-        if (!hash) hash = '#home';
-        history.replaceState(null, '', hash);
-        render(hash);
-      }
-    
-      // Intercept internal links
-      document.querySelectorAll('a[href^="#"]').forEach(a => {
-        a.addEventListener('click', e => {
-          e.preventDefault();
-          navigate(a.getAttribute('href'));
-        });
-      });
-    
-      // Keyboard shortcuts (g = go): ga, gp, ge, gc, gh
-      const map = { a:'#about', p:'#projects', e:'#experience', c:'#contact', h:'#home' };
-      window.addEventListener('keydown', (e)=>{
-        if((e.ctrlKey||e.metaKey) && e.key.toLowerCase() === 'k'){ e.preventDefault(); navigate('#home'); return; }
-        if(e.key.toLowerCase() === 'g') { window._gPressed = true; setTimeout(()=>window._gPressed=false, 800); }
-        else if(window._gPressed && map[e.key.toLowerCase()]) { navigate(map[e.key.toLowerCase()]); window._gPressed=false; }
-      });
-    
-      // Initial render
-      navigate(location.hash || '#home');
-    </script>
+
+  <script src="js/router.js" defer></script>
 
 </body>
 </html>
