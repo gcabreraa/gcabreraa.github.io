@@ -26,17 +26,23 @@
 
     /* --- PIXEL/Binbows palette --- */
     .theme-pixel{
-      --bg:#1185d9;        /* desktop blue */
-      --panel:#3d71b0;     /* window */
-      --panel-2:#577fae;   /* darker window */
-      --text:#f3e9ff;      /* light text */
-      --muted:#bfadf3;
+      --bg:#1185d9;        /* desktop blue*/
+      --panel:#7d9fc8;     /* window */
+      --panel-2:#90a1b4;   /* darker window */
+      --text:#ddcced;      /* light text */
+      --muted:#b1a4d9;
       --accent:#ff7bd8;    /* pink highlight */
-      --accent-2:#6f47ff;  /* purple button/accent */
+      --accent-2:#6b6bc2;  /* purple button/accent */
         --frame:#082c63;     /* bezel */
         --border:#0a3f85;    /* borders */
         --link:#b3f6ff;      /* links */
 
-        --tab-top:#7b5cff;
-        --tab-bot:#4f38cc;
+        --tab-top:#4361dd;
+        --tab-bot:#4d60de;
     }
+
+/* Force wallpaper for the pixel theme */
+body.theme-pixel{
+  background: url("../backgrounds/background-5.jpg") center center / cover no-repeat fixed !important;
+  background-color: #48788c; /* fallback while loading */
+}

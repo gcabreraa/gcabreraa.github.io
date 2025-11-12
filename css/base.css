@@ -36,8 +36,14 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 
-body {
-  background: var(--bg);
+@font-face {
+  font-family: 'LeviWindows';
+  src: url('../fonts/LeviWindows-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {  
   color: var(--text);
   font-family: 'Fira Code', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   line-height: 1.6;
@@ -56,6 +62,7 @@ a {
   color: var(--link);
   text-underline-offset: 2px;
 }
+
 a:hover { opacity: .9; }
 
 /* Buttons/interactive: pointer cursor override */
@@ -84,10 +91,6 @@ pre, code, kbd, samp { font-family: 'Fira Code', ui-monospace, monospace; }
 }
 
 /* Utility classes you’ll reuse everywhere */
-.ui-pixel { font-family: 'Press Start 2P', monospace; letter-spacing: 0; }
+.ui-pixel { font-family: 'LeviWindows', 'Press Start 2P', monospace; }
 .ui-crt   { font-family: 'VT323','Fira Code',monospace; }
 
-/* Keep component/layout rules OUT of base.css:
-   - windows, titlebar, sidebar, taskbar, grid, card, ticker, scanlines → layout.css
-   - theme color sets (theme-blue, theme-rose, theme-pixel) → themes.css
-*/
