@@ -381,9 +381,10 @@ p{ margin:.3rem 0 .9rem; }
   /* App window sizing so content isn’t hidden and is a bit shorter */
   .main-workarea{
     max-width: 85%;
+    max-height: 70%;
     height: calc(100vh - 170px); /* space for titlebar + dock + taskbar */
-    margin: 10px auto 54px;
-    padding: 0 12px;
+    margin: 10px auto 30px;
+    padding: 0 8px;
   }
 
   .window,
