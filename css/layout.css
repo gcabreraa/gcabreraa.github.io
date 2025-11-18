@@ -3,7 +3,7 @@
 /* Work area + app window */
 .main-workarea{
   position: relative;
-  max-width: 700px;               /* smaller center window */
+  max-width: 720px;               /* smaller center window */
   height: calc(100vh - 160px);    /* topbar + taskbar */
   margin: 20px auto 664px;
   transform : translateX(5%);      /* subtle right shift*/
@@ -33,6 +33,7 @@
 
 /* Window chrome */
 .window{
+  position:relative;
   max-width:700px;
   margin:1.2rem auto;
   background:var(--panel);
@@ -54,13 +55,39 @@
   pointer-events: none;
 } 
 
+.window.app.closed{
+  display:none;
+}
+
+.window.app.minimized{
+  max-height:38px;
+  overflow:hidden;
+}
+
+.window.app.minimized .content{
+  display:none;
+}
+
+.window.app.maximized {
+  position: fixed;
+  inset: 40px 32px 48px 32px;  /* top, right, bottom, left offsets */
+  max-width: none;
+  width: auto;
+  height: auto;
+  margin: 0;
+  z-index: 80;
+}
+
+.window.app.maximized .content{
+  flex:1;
+}
+
  .titlebar{
   display:flex; align-items:center;
   background-color: var(--border);
   border-bottom:1px solid var(--tab-bot);
   height:30px; padding:0 .4rem;
 }
-
 
 .titlebar .title{
   margin-left:-3px; margin-right:auto;      
@@ -69,7 +96,6 @@
   font-size: 15px;
   color: rgb(234, 223, 241);
 } 
-
 
 .win-controls{
   display:flex;
@@ -107,7 +133,6 @@
   border-color:#5e0a12 #ffe0e5 #ffe0e5 #5e0a12;
   background:#d2949c;
 }
-
 
 /* Topbar + brand + ticker */
 
@@ -217,7 +242,7 @@ p{ margin:.3rem 0 .9rem; }
   display: inline-flex;
   align-items: center;
   gap: .45rem;
-  padding: 2px 9px;
+  padding: 1px 9px;
   height: 20px;
   cursor: pointer;
 
@@ -255,7 +280,7 @@ p{ margin:.3rem 0 .9rem; }
   background: #c0c0c0;
   border: 2px solid;
   border-color: #808080 #ffffff #ffffff #808080;
-  padding: 3px 8px;
+  padding: 1px 8px;
 }
 
 .clock {
@@ -267,6 +292,30 @@ p{ margin:.3rem 0 .9rem; }
 
 .task-items{ display:flex; gap:.4rem; flex:1; }
 
+.taskbar .taskbar-toggle{
+  margin-left:.4rem;
+  background:#f0f0f0;
+  border:2px solid;
+  border-color:#e8e9ea #5a5a5a #5a5a5a #ffffff;
+  padding:3px 10px;
+  font:600 13px/1 'LeviWindows', system-ui;
+  color:#1b1b1b;
+  cursor:pointer;
+  border-radius:0;
+}
+
+.taskbar .taskbar-toggle:active{
+  border-color:#5a5a5a #f0f0f0 #ffffff #5a5a5a;
+}
+
+.taskbar .taskbar-toggle[aria-pressed="true"]{
+  background:#d6e2d8;
+  border-color:#5a5a5a #534d4d #ffffff #5a5a5a;
+  box-shadow:
+    inset -1px -1px 0 #efefef,
+    inset 1px 1px 0 #8a8a8a;
+  cursor:pointer;
+}
 
 /* task item "button" look */
 .task-items .task {
@@ -277,10 +326,24 @@ p{ margin:.3rem 0 .9rem; }
     inset -1px -1px 0 rgba(255,255,255,.18),
     inset 1px 1px 0 rgba(0,0,0,.15);
   padding: 3px 10px;
-  height: 29px;
+  height: 27px;
   display: inline-flex;
   align-items: center;
   font: 500 14px/1 'LeviWindows', system-ui, sans-serif;
+}
+
+.task-items .task.minimized{
+  background: linear-gradient(#f6f6f6,#d8d8d8);
+  color:#1e1e1e;
+  border-color:#ffffff #5a5a5a #5a5a5a #ffffff;
+  box-shadow:
+    inset 1px 1px 0 #ffffff,
+    inset -1px -1px 0 #979797;
+  cursor:pointer;
+}
+
+.task-items .task.hidden{
+  display:none;
 }
 
 /* Template nodes are never displayed in routed mode */
