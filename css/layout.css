@@ -10,12 +10,24 @@
 }
 
 .window.app{
-  display:flex;
-  flex-direction:column;
-  height:100%;
-  max-width:100%;
-  margin:0 auto;
-  border-radius:0;                 /* squared */
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  border: 3px solid var(--frame);
+  border-radius: 0;
+  background: var(--panel);
+  box-shadow:
+    inset 1px 1px 0 #ffffff,
+    inset -1px -1px 0 #7d7d7d,
+    3px 3px 0 rgba(0,0,0,.35);
+  font-family: 'LeviWindows', 'Press Start 2P', monospace;
+  font-size: 17px;       
+  font-weight: 500;
+  letter-spacing: 0.1px;
+  color: var(--text);
 }
 
 .window.app .content{
@@ -24,17 +36,60 @@
   height:100%;
 }
 
-/* Topbar + brand + ticker */
-.topbar{
-  position:sticky; top:0; z-index:50;
-  display:flex; gap:.75rem; align-items:center; justify-content:space-between;
-  padding:.5rem .75rem; background:linear-gradient(0deg, var(--panel), var(--panel-2));
-  border-bottom:1px solid var(--border);
-  box-shadow:0 10px 18px -12px var(--shadow);
+/* Window chrome */
+.window{
+  max-width:700px; margin:1.2rem auto; background:var(--panel);
+  border:1px solid var(--frame); border-radius:0; overflow:hidden;
+  box-shadow:0 16px 40px -24px var(--shadow), inset 0 0 0 1px var(--border);
 }
 
-.brand{ display:flex; align-items:center; gap:.5rem; font-weight:700; letter-spacing:.3px; }
-.brand .cube{ width:18px; height:18px; background:var(--accent); box-shadow:8px 8px 0 0 var(--accent-2); }
+ .titlebar{
+  display:flex; align-items:center;
+  border-bottom:1px solid var(--frame);
+  height:30px; padding:0 .4rem;
+}
+
+
+.titlebar .title{
+  margin-left:-3px; margin-right:auto;      
+  font-weight:600; white-space:nowrap;
+  letter-spacing: 0.8px;
+  font-size: 16px;
+  color: rgb(234, 223, 241);
+} 
+
+
+.win-controls{
+  display:flex;
+  gap:2px;
+  margin-left:auto;
+  padding:1px;
+}
+
+.win-btn{
+  width:28px;
+  height:22px;
+  line-height:20px;
+  font:900 14px/1 'LeviWindows', monospace;
+  color:#949090;
+  border:1px solid #b5b0b0;
+  border-radius:0;
+  box-shadow:
+    inset 1px 1px 0 #ffffff,
+    inset -1px -1px 0 #cccbcb;
+  cursor:pointer;
+}
+
+.win-btn.close{
+  color:#4a0000;
+  background:linear-gradient(#ffe5e5,#d9a6a6);
+  border-color:#6a0000;
+}
+
+.win-btn:hover{ filter:brightness(0.95); }
+
+
+/* Topbar + brand + ticker */
 
 .dock{ display:none; }
 
@@ -46,35 +101,6 @@
 @keyframes marquee{
   from{ transform:translateX(0); }
   to  { transform:translateX(-50%); }
-}
-
-/* Window chrome */
-.window{
-  max-width:700px; margin:1.2rem auto; background:var(--panel);
-  border:1px solid var(--frame); border-radius:0; overflow:hidden;
-  box-shadow:0 16px 40px -24px var(--shadow), inset 0 0 0 1px var(--border);
-}
-
-.titlebar{
-  display:flex; align-items:center;
-  background:linear-gradient(180deg, var(--tab-top),var(--tab-bot));
-  border-bottom:1px solid var(--frame);
-  height:32px; padding:0 .4rem;
-  font-size:11px; line-height:1;
-}
-
-.titlebar .title{
-  margin-left:0; margin-right:auto;       /* left aligned */
-  font-weight:700; white-space:nowrap;
-}
-
-/* Main window title bar text (make larger + bold) */
-.window.app .titlebar .title {
-  font-family: 'LeviWindows', 'Press Start 2P', monospace;
-  font-size: 18px;       /* adjust until it looks right */
-  font-weight: 500;
-  letter-spacing: 0.1px;
-  color: var(--text);
 }
 
 /* Sidebar icon labels (make larger + easier to read) */
@@ -94,19 +120,6 @@
   font-weight: 600;
   letter-spacing: 0.5px;
 }
-
-.win-controls{ display:flex; gap:2px; margin-left:8px; }
-.win-btn{
-  width:26px; height:20px; line-height:18px; font-size:.85rem;
-  color:#111; background:#d6d9dd; border:1px solid #6c737a; border-radius:2px;
-  box-shadow: inset 1px 1px 0 #f0f2f5, 1px 1px 0 #6a7077;
-  cursor:pointer;
-}
-.win-btn:hover{ filter:brightness(0.95); }
-.win-btn.close{ background:var(--accent-2); color:#140a33; border-color:#3c2c99; }
-
-.title{ color:var(--muted); font-size:.9rem; padding-left:.3rem; }
-.content{ padding:1rem; }
 
 /* Terminal look */
 pre.terminal{
@@ -153,22 +166,9 @@ p{ margin:.3rem 0 .9rem; }
 
 .bg-window{
   position:absolute;
-  border:1px solid var(--frame);
-  /* background:var(--panel); */
-  box-shadow: 0 14px 40px -28px var(--shadow), inset 0 0 0 1px var(--border);
   border-radius:0;
   opacity:1;                          /* faint — looks truly “behind” */
   filter: saturate(0.95);
-}
-.bg-title{ height:22px; background:linear-gradient(180deg, var(--frame), var(--panel)); border-bottom:1px solid var(--frame); font-size:.8rem; color:var(--text); display:flex; align-items:center; padding:0 .4rem; opacity:.9; } */
-.bg-body{ padding:.25rem; } 
-.bg-window img{ width:100%; height:auto; display:block; image-rendering:pixelated; }
-
-/* Scanlines overlay */
-.scanlines{
-  position:fixed; inset:0; pointer-events:none;
-  background: repeating-linear-gradient(to bottom, rgba(255,255,255,.03), rgba(255,255,255,.03) 1px, rgba(0,0,0,0) 3px, rgba(0,0,0,0) 4px);
-  mix-blend-mode: overlay; opacity:.4;
 }
 
 /* Taskbar */

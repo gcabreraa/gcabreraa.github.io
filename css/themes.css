@@ -29,12 +29,12 @@
       --bg:#1185d9;        /* desktop blue*/
       --panel:#7d9fc8;     /* window */
       --panel-2:#90a1b4;   /* darker window */
-      --text:#ddcced;      /* light text */
+      --text:#ece9ef;      /* light text */
       --muted:#b1a4d9;
       --accent:#ff7bd8;    /* pink highlight */
       --accent-2:#6b6bc2;  /* purple button/accent */
-        --frame:#082c63;     /* bezel */
-        --border:#0a3f85;    /* borders */
+        --frame:#afb8c5;     /* bezel */
+        --border:#3e7dd0;    /* borders */
         --link:#b3f6ff;      /* links */
 
         --tab-top:#4361dd;
