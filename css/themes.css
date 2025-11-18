@@ -33,12 +33,11 @@
       --muted:#b1a4d9;
       --accent:#ff7bd8;    /* pink highlight */
       --accent-2:#6b6bc2;  /* purple button/accent */
-        --frame:#afb8c5;     /* bezel */
+        --frame:#e2e2e2;     /* bezel */
         --border:#3e7dd0;    /* borders */
         --link:#b3f6ff;      /* links */
 
-        --tab-top:#4361dd;
-        --tab-bot:#4d60de;
+        --tab-bot:#125864;
     }
 
 /* Force wallpaper for the pixel theme */

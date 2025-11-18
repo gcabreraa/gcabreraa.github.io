@@ -16,13 +16,8 @@
   height: 100%;
   max-width: 100%;
   margin: 0 auto;
-  border: 3px solid var(--frame);
   border-radius: 0;
   background: var(--panel);
-  box-shadow:
-    inset 1px 1px 0 #ffffff,
-    inset -1px -1px 0 #7d7d7d,
-    3px 3px 0 rgba(0,0,0,.35);
   font-family: 'LeviWindows', 'Press Start 2P', monospace;
   font-size: 17px;       
   font-weight: 500;
@@ -38,14 +33,31 @@
 
 /* Window chrome */
 .window{
-  max-width:700px; margin:1.2rem auto; background:var(--panel);
-  border:1px solid var(--frame); border-radius:0; overflow:hidden;
-  box-shadow:0 16px 40px -24px var(--shadow), inset 0 0 0 1px var(--border);
+  max-width:700px;
+  margin:1.2rem auto;
+  background:var(--panel);
+  border:3px solid var(--frame);
+  border-radius:0;
+  overflow:hidden;
+  box-shadow:6px 6px 0 rgba(0,0,0,.45);
 }
+
+.window::before {
+  content: '';
+  position: absolute;
+  inset: -3px;                         /* sit halfway across the border */
+  border: 5px solid transparent;
+  border-top-color: rgba(255,255,255,.25);   /* highlight */
+  border-left-color: rgba(255,255,255,.15);
+  border-right-color: rgba(0,0,0,.35);       /* shadow strip */
+  border-bottom-color: rgba(0,0,0,.45);
+  pointer-events: none;
+} 
 
  .titlebar{
   display:flex; align-items:center;
-  border-bottom:1px solid var(--frame);
+  background-color: var(--border);
+  border-bottom:1px solid var(--tab-bot);
   height:30px; padding:0 .4rem;
 }
 
@@ -54,7 +66,7 @@
   margin-left:-3px; margin-right:auto;      
   font-weight:600; white-space:nowrap;
   letter-spacing: 0.8px;
-  font-size: 16px;
+  font-size: 15px;
   color: rgb(234, 223, 241);
 } 
 
@@ -63,6 +75,7 @@
   display:flex;
   gap:2px;
   margin-left:auto;
+  margin-right: -5px;
   padding:1px;
 }
 
@@ -71,22 +84,29 @@
   height:22px;
   line-height:20px;
   font:900 14px/1 'LeviWindows', monospace;
-  color:#949090;
-  border:1px solid #b5b0b0;
+  color: #6e6e6e;
+  background:#d7d7d7;
+  border:2px solid;
+  border-color:#f8f8f8 #4a4a4a #4a4a4a #f8f8f8;
   border-radius:0;
-  box-shadow:
-    inset 1px 1px 0 #ffffff,
-    inset -1px -1px 0 #cccbcb;
+  box-shadow:none;
+  image-rendering:pixelated;
   cursor:pointer;
 }
 
-.win-btn.close{
-  color:#4a0000;
-  background:linear-gradient(#ffe5e5,#d9a6a6);
-  border-color:#6a0000;
+.win-btn:hover{
+  background:#c9c9c9;
 }
 
-.win-btn:hover{ filter:brightness(0.95); }
+.win-btn:active{
+  border-color:#4a4a4a #f8f8f8 #f8f8f8 #4a4a4a;
+  background:#bdbdbd;
+}
+
+.win-btn.close:active{
+  border-color:#5e0a12 #ffe0e5 #ffe0e5 #5e0a12;
+  background:#d2949c;
+}
 
 
 /* Topbar + brand + ticker */
@@ -115,11 +135,16 @@
 
 .ui-pixel{ font-family: 'LeviWindows', 'Press Start 2P', monospace;}
 .terminal, pre, code{ font-family:'VT323','Fira Code',monospace; font-size:18px; }
+
 .hero-cursive {
-  font-family: 'Kalnia Glaze', 'Pacifico', cursive;
-  font-weight: 600;
-  letter-spacing: 0.5px;
+  font-family: "AdvinePixel", "Monotype Corsiva", serif;
+  font-size: clamp(3rem, 4.6vw, 3.1rem);
+  letter-spacing: 0.05rem;
+  text-align: left;
+  color: var(--accent);
+  text-shadow: 1px 1px 0 #3e012e;
 }
+
 
 /* Terminal look */
 pre.terminal{
@@ -176,6 +201,7 @@ p{ margin:.3rem 0 .9rem; }
   position:fixed; left:0; right:0; bottom:0; height:34px;
   display:flex; align-items:center; gap:.5rem; padding:0 0.5rem;
   background: #c0c0c0;
+  border-bottom:4px solid #4b4b4b;
   border-top:2px solid #dfdfdf;
   box-shadow:
     inset 0 1px 0 #ffffff,   /* top inner highlight */
