@@ -127,7 +127,7 @@ function updateThemeToggleState(theme) {
   if (!themeToggle) return;
   const isAccessible = theme === THEME_ACCESS;
   themeToggle.setAttribute('aria-pressed', String(isAccessible));
-  themeToggle.textContent = isAccessible ? 'A11y On' : 'A11y Off';
+  themeToggle.textContent = isAccessible ? 'Lights On' : 'Lights Off';
 }
 
 function applyThemeClass(theme) {

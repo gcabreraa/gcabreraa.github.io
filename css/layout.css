@@ -351,6 +351,47 @@ p{ margin:.3rem 0 .9rem; }
 /* Template nodes are never displayed in routed mode */
 .template{ display:none !important; }
 
+.intro-blurb__headline {
+  display: block;
+  text-align: center;
+}
+
+.profile-pic-wrap {
+  float: right;
+  width: min(40%, 150px);
+  margin: 0 0 var(--space-3) var(--space-4);
+
+  background: #c0c0c0;
+  border: 2px solid var(--accent-2);
+  border-radius: 6px;
+  overflow: hidden; 
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-pic-wrap:hover {
+  transform: rotate(-1deg) scale(1.05);
+}
+
+.profile-pic-wrap img {
+  width: 100%;
+  height: auto;
+  display: block;
+  image-rendering: pixelated;
+  border-radius: 6px 6px 0 0; 
+}
+
+@media (max-width: 640px) {
+  .profile-pic-wrap {
+    float: none;
+    width: min(70vw, 160px);
+    margin: 0 auto var(--space-3);
+  }
+}
+
+
 /* ===== Mobile fixes (append at end) ===== */
 @media (max-width: 825px){
 
