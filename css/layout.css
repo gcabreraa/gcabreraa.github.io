@@ -380,10 +380,12 @@ p{ margin:.3rem 0 .9rem; }
 
   /* App window sizing so content isn’t hidden and is a bit shorter */
   .main-workarea{
-    max-width: 85%;
-    max-height: 75%;
+    max-width: 90%;
+    max-height: 80%;
+    height: calc(100vh - 170px); 
     margin: 10px auto 30px;
     padding: 0 8px;
+    align-content: center;
   }
 
   .window,
