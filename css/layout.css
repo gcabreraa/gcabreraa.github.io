@@ -412,6 +412,7 @@ p{ margin:.3rem 0 .9rem; }
   opacity: .99;
 }
 
+
 @media (max-width: 640px) {
   .profile-pic-wrap {
     float: none;
