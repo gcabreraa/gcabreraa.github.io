@@ -12,6 +12,19 @@
   --border: #214b4f;
   --link: #7ADAA5;
   --shadow: rgba(0,0,0,.55);
+  --xp-border: #7b0000;
+  --xp-border-inner: #330000;
+  --xp-shadow: #300000;
+  --xp-header-start: #be1111;
+  --xp-header-end: #870a0a;
+  --xp-header-text: #fff9f0;
+  --xp-body-bg: #ffd9cf;
+  --xp-body-text: #3b1510;
+  --xp-links-text: #8f4a4a;
+  --xp-links-link: #cd5a5a;
+  --xp-meta-bg: #f6d3c9;
+  --xp-meta-border: #901212;
+  --xp-meta-text: #6b0d0d;
 
   /* spacing + radius tokens (optional) */
   --radius-0: 0;
