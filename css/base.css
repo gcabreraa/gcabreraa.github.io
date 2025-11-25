@@ -25,6 +25,18 @@
   --xp-meta-bg: #f6d3c9;
   --xp-meta-border: #901212;
   --xp-meta-text: #6b0d0d;
+  --proj-mint-bg: #bfe9d9;
+  --proj-mint-bar: #dff5ee;
+  --proj-rose-bg: #f4b4ce;
+  --proj-rose-bar: #ffd3e8;
+  --proj-lime-bg: #d5ffa1;
+  --proj-lime-bar: #b1ff6b;
+  --proj-amber-bg: #f8d57c;
+  --proj-amber-bar: #ffbe5b;
+  --proj-lilac-bg: #d3b8ff;
+  --proj-lilac-bar: #c196ff;
+  --proj-cyan-bg: #9de8ff;
+  --proj-cyan-bar: #6ddfff;
 
   /* spacing + radius tokens (optional) */
   --radius-0: 0;

@@ -37,6 +37,18 @@
   --xp-meta-bg:#0a2d31;
   --xp-meta-border:#1a8f87;
   --xp-meta-text:#d6fff4;
+  --proj-mint-bg:#0a2a29;
+  --proj-mint-bar:#12504a;
+  --proj-rose-bg:#2b1121;
+  --proj-rose-bar:#501a33;
+  --proj-lime-bg:#14230b;
+  --proj-lime-bar:#274417;
+  --proj-amber-bg:#2d1c05;
+  --proj-amber-bar:#503213;
+  --proj-lilac-bg:#1b1330;
+  --proj-lilac-bar:#36215a;
+  --proj-cyan-bg:#0a1d2d;
+  --proj-cyan-bar:#103653;
 }
 
 /* --- PIXEL/Binbows palette --- */
@@ -64,6 +76,18 @@
     --xp-meta-bg:#f7d0ff;
     --xp-meta-border:#b155c7;
     --xp-meta-text:#3a1a4b;
+    --proj-mint-bg:#8ac8d0;
+    --proj-mint-bar:#7fc6cf;
+    --proj-rose-bg:#ff7bd8;
+    --proj-rose-bar:#ff7bd8;
+    --proj-lime-bg:#b1d584;
+    --proj-lime-bar:#8fd056;
+    --proj-amber-bg:#f8d57c;
+    --proj-amber-bar:#ffbe5b;
+    --proj-lilac-bg:#dbc6fc;
+    --proj-lilac-bar:#c196ff;
+    --proj-cyan-bg:#96d9ee;
+    --proj-cyan-bar:#6ddfff;
     --tab-bot:#125864;
 }
 

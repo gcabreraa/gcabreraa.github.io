@@ -198,28 +198,7 @@ p{ margin:.3rem 0 .9rem; }
   box-shadow: inset 0 0 0 1px var(--frame);
 }
 
-.project-card {
-  position: relative;
-}
 
-/* Thumbnail image */
-.project-thumb {
-  float: left;
-  width: 100px;              /* adjust size here */
-  height: auto;
-  margin: 0 .9rem .4rem 0;  /* spacing around image */
-  border: 2px solid var(--frame);
-  image-rendering: pixelated;
-  box-shadow: 3px 3px 0 rgba(0,0,0,0.35);
-  border-radius: 4px;       /* optional: soften corners */
-}
-
-/* Clear float at end of card */
-.project-card::after {
-  content: "";
-  display: block;
-  clear: both;
-}
 
 .pill{ display:inline-block; padding:.15rem .5rem; border:1px solid var(--border); border-radius:999px; margin-right:.3rem; font-size:.85rem; color:var(--muted); }
 
@@ -629,6 +608,212 @@ p{ margin:.3rem 0 .9rem; }
   }
 }
 
+/* === Generic cards (keep as-is) ======================== */
+.grid{ display:grid; gap:.9rem; }
+@media (min-width:820px){ .grid.cols-2{ grid-template-columns:1fr 1fr; } }
+
+.card{
+  border:1px solid var(--border);
+  border-radius:.5rem;
+  padding:.9rem;
+  background:linear-gradient(180deg, var(--panel), var(--panel-2));
+  box-shadow: inset 0 0 0 1px var(--frame);
+}
+
+.pill{
+  display:inline-block;
+  padding:.15rem .5rem;
+  border:1px solid var(--border);
+  border-radius:999px;
+  margin-right:.3rem;
+  font-size:.85rem;
+  color:var(--muted);
+}
+
+/* === PROJECTS: 90s two-column ad cards ================= */
+
+/* 2-column grid like the Sony portal */
+.project-stack{
+  display:grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem 1.25rem;
+}
+
+@media (max-width: 880px){
+  .project-stack{
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Base panel */
+.project-panel{
+  position: relative;
+  overflow: hidden;
+  --panel-bg: color-mix(in srgb, var(--panel) 70%, white);
+  --panel-bar: color-mix(in srgb, var(--accent) 80%, var(--panel));
+
+  border-radius: 0;
+  border: 3px solid var(--frame);
+  background: var(--panel-bg);
+  box-shadow:
+    0 0 0 2px #ffffff,
+    4px 4px 0 rgba(0,0,0,.7);
+}
+
+/* inner highlight edge */
+.project-panel::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border:1px solid rgba(255,255,255,.25);
+  pointer-events:none;
+}
+
+/* header bar: saturated strip */
+.project-panel .panel-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:.45rem .7rem;
+
+  background: var(--panel-bar);
+  color:#000;
+  border-bottom:2px solid rgba(0,0,0,.6);
+
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  font-family:'LeviWindows','Press Start 2P',monospace;
+}
+
+.panel-header h3{
+  margin:0;
+  font-size:.95rem;
+  font-weight:800;
+  color:var(--accent-2);
+}
+
+.panel-tag{
+  font-size:.75rem;
+}
+
+/* body: text + small thumbnail */
+.panel-body{
+  display:flex;
+  align-items:flex-start;
+  gap:.9rem;
+  padding:.8rem .9rem 1rem;
+}
+
+.panel-copy p{
+  margin:.2rem 0 .4rem;
+  font-size:.95rem;
+  line-height:1.45;
+}
+
+.panel-preview{
+  font-weight:650;
+  color:var(--text);
+}
+
+.panel-meta .pill{
+  margin-bottom:.2rem;
+}
+
+.panel-links{
+  display:flex;
+  gap:.8rem;
+  flex-wrap:wrap;
+  margin-top:.25rem;
+  font-weight:600;
+  font-size:.85rem;
+}
+
+/* “[..]” details toggles */
+.panel-more{
+  display:block;
+  margin:0 0 .4rem .2rem;
+  font-size:0.95rem;
+}
+
+.panel-more summary{
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  gap:.25rem;
+  color:var(--accent-2);
+  font-weight:600;
+  cursor:url(https://cur.cursors-4u.net/anime/ani-10/ani977.png) 2 2, pointer;
+
+}
+.panel-more summary::-webkit-details-marker{ display:none; }
+
+/* thumbnail block */
+.panel-art{
+  flex:0 0 80px;
+}
+
+.panel-art img,
+.panel-art__placeholder{
+  width:80px;
+  height:80px;
+  border-radius:0;
+  border:3px solid #fff;
+  box-shadow:3px 3px 0 rgba(0,0,0,.7);
+  background:var(--panel);
+}
+
+.panel-art__placeholder{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:1.1rem;
+}
+
+.project-panel.theme-mint{
+  --panel-bg: color-mix(in srgb, var(--proj-mint-bg) 50%, var(--panel));
+  --panel-bar: color-mix(in srgb, var(--proj-mint-bar) 70%, white);
+}
+
+.project-panel.theme-rose{
+  --panel-bg: color-mix(in srgb, var(--proj-rose-bg) 55%, var(--panel-2));
+  --panel-bar: color-mix(in srgb, var(--proj-rose-bar) 75%, white);
+}
+
+.project-panel.theme-lime{
+  --panel-bg: color-mix(in srgb, var(--proj-lime-bg) 55%, var(--panel));
+  --panel-bar: color-mix(in srgb, var(--proj-lime-bar) 75%, white);
+}
+
+.project-panel.theme-amber{
+  --panel-bg: color-mix(in srgb, var(--proj-amber-bg) 55%, var(--panel));
+  --panel-bar: color-mix(in srgb, var(--proj-amber-bar) 80%, white);
+}
+
+.project-panel.theme-lilac{
+  --panel-bg: color-mix(in srgb, var(--proj-lilac-bg) 60%, var(--panel-2));
+  --panel-bar: color-mix(in srgb, var(--proj-lilac-bar) 80%, white);
+}
+
+.project-panel.theme-cyan{
+  --panel-bg: color-mix(in srgb, var(--proj-cyan-bg) 55%, var(--panel));
+  --panel-bar: color-mix(in srgb, var(--proj-cyan-bar) 80%, white);
+}
+
+/* mobile tweak: stack image above text */
+@media (max-width: 720px){
+  .panel-body{
+    flex-direction:column;
+  }
+  .panel-art{
+    order:-1;
+    align-self:center;
+  }
+}
+
+.panel-more[open] + .panel-meta + .panel-links{
+  margin-top:.4rem;
+}
+
 /* ===== Experience "blog" log ===== */
 
 .xp-log {
@@ -756,5 +941,3 @@ p{ margin:.3rem 0 .9rem; }
 @media (min-width: 821px) and (max-width: 1100px){
   .side-label{ font-size:.68rem; color:#212958; }
 }
-
-
