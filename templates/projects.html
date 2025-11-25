@@ -1,37 +1,117 @@
    <div class="content">
         <div class="grid cols-2">
-          <article class="card">
+          <article class="card project-card">
+            <img src="images/mitos-preview.png" alt="MITOS device preview" class="project-thumb">
+            
             <h3>MITOS — Campus Heat Monitor</h3>
-            <p>ESP32‑C3 + SHT4x + VEML7700 + e‑ink. RTC/flash buffering, LoRa/Wi‑Fi upload windows, partial refresh UI, QR telemetry.</p>
-            <p>
-              <span class="pill">ESP32</span><span class="pill">LoRa</span><span class="pill">E‑Ink</span><span class="pill">Low‑Power</span>
+            <p>Low-power environmental sensing unit for mapping urban heat across MIT’s campus. Built around an ESP32-C3 with custom PCBs for power management, sensing peripherals (SHT4x + VEML7700), and field deployment.
+            The node performs multi-stage buffering (RTC → flash) to survive outages, and schedules LoRa/Wi-Fi upload windows to minimize energy usage. An e-ink display provides an accessible community interface, showing local temperature, battery status, and a QR code that links to live telemetry via a custom backend dashboard.</p>
+            <p><strong>Role:</strong> Firmare + communications implementation </p>
+              <span class="pill">ESP32</span><span class="pill">LoRa</span>
+              <span class="pill">C++</span><span class="pill">KiCAD</span><span class="pill">2025</span>
             </p>
-            <p><a href="https://github.com/" target="_blank" rel="noreferrer noopener">Repo</a> · <a href="#">Demo</a></p>
+            <p>
+              <a href="https://github.com/gcabreraa/mitosis-project-2025" target="_blank" rel="noreferrer noopener">Repo</a> ·
+              <a href="https://docs.google.com/presentation/d/18ddx2oT0A9gGHlHaXcvTStzuUjTPh3UD1AqeYcPpL7Q/edit?usp=drive_link" target="_blank" rel="noreferrer noopener">Slides</a>
+            </p>
+          </article>
+          <article class="card project-card">
+            <img src="images/astra-preview.png" alt="MITOS device preview" class="project-thumb">
+
+            <h3>ASTRA — Networking Architecture Project</h3>
+
+            <p>Designed a fault-tolerant extension of a given NASA SolarNet spec for communication across Earth, Moon, and Mars. Our system integrates persistent bundle storage, adaptive routing, and selective retransmission to handle long delays and intermittent connectivity in space.</p>
+
+            <p><strong>Role:</strong> Co-designed node-level communication logic and distributed storage layout; evaluated link constraints across use cases, authored reliability + performance trade-offs in the final design.</p>
+
+            <p>
+              <span class="pill">Networking Research</span>
+              <span class="pill">Distributed Systems</span>
+              <span class="pill">ZFS</span> <span class="pill">2025</span>
+            </p>
+
+            <p>
+              <a href="https://docs.google.com/document/d/1cOCUEaAVGkqs2jXp9CCTP37xcXpISTWYaUpNlvsYYDI/edit?usp=sharing"
+                target="_blank" rel="noreferrer noopener">Final Report</a> ·
+                <a href="https://web.mit.edu/6.1800/www/assignments/dp.pdf"
+                target="_blank" rel="noreferrer noopener">Specs</a> 
+            </p>
           </article>
           <article class="card">
-            <h3>Grid‑thym — FPGA Music Game</h3>
-            <p>HDMI + SD‑card + BRAM + audio synthesis. Piano‑Tiles‑style gameplay with sprite/row dissolve and keyboard input.</p>
+            <h3>Grid-thym — FPGA Music Game</h3>
             <p>
-              <span class="pill">FPGA</span><span class="pill">HDMI</span><span class="pill">SystemVerilog</span>
+              Piano-Tiles-style rhythm game implemented entirely on an FPGA. An SD-card
+              reader streams MIDI/WAV data into audio-processing pipelines, which map
+              notes to frequencies and drive both audio synthesis and a 10×10 visual
+              grid. The display module renders falling tiles over HDMI using BRAM-backed
+              line buffers, while the game logic checks keyboard hits against the bottom
+              row in real time.
             </p>
-            <p><a href="https://github.com/" target="_blank" rel="noreferrer noopener">Repo</a></p>
+            <p>
+              <strong> Role: </strong> Designed the node architecture and SystemVerilog modules for storage layout,
+              SD-card I/O, and tile rendering, focusing on timing, buffering, and clean
+              interfaces between audio, visualization, and input.
+            </p>
+            <p>
+              <span class="pill">FPGA</span>
+              <span class="pill">SystemVerilog</span>
+              <span class="pill">HDMI</span>
+              <span class="pill">BRAM</span> <span class="pill">2024</span>
+            </p>
+            <p>
+              <a href="https://github.mit.edu/rbchavez/Gridthym"
+                target="_blank" rel="noreferrer noopener">Repo</a> ·
+              <span>Demo (coming soon)</span>
+            </p>
           </article>
           <article class="card">
-            <h3>URJA — DVFS Policy Experiments</h3>
-            <p>Centralized vs. decentralized policy daemons; PAPI counters + RAPL telemetry; Slurm plugin prototypes; IPC via FIFO/MQ/SHM.</p>
+            <h3>Piano Tiles — PSoC Game</h3>
+            <p>Built a Piano-Tiles-style game on a PSoC 5LP using a 240×320 TFT display, 
+            interrupt-driven button input, and real-time audio synthesis through the 
+            on-chip VDAC. Notes are generated using a wavetable synthesizer that 
+            steps through a sine-wave table inside a SysTick ISR, while the game 
+            renders falling tiles via the emWin graphics library over SPI.
+          </p>
             <p>
-              <span class="pill">HPC</span><span class="pill">DVFS</span><span class="pill">C/C++</span>
+              <span class="pill">PSoC 5LP</span>
+              <span class="pill">TFT</span>
+              <span class="pill">DAC</span>
+              <span class="pill">Embedded C</span> <span class="pill">2024</span>
             </p>
-            <p><a href="https://github.com/" target="_blank" rel="noreferrer noopener">Notes</a></p>
-          </article>
+            <p><a href="" target="_blank" rel="noreferrer noopener">Repo (coming soon) </a></p>
+          </article>  
           <article class="card">
-            <h3>Containerized Desalination Control</h3>
-            <p>Python drivers + control loops for a shipping‑container EDR/RO system. Sensor/actuator orchestration & data logging.</p>
+            <h3>Star Battle — Network Puzzle Game</h3>
             <p>
-              <span class="pill">Python</span><span class="pill">Controls</span><span class="pill">IoT</span>
+              Network-based logic puzzle system with a custom GUI for interactive gameplay. 
+              Designed abstract data types to represent puzzle rules, board state, and player actions, 
+              enabling efficient validation and smooth multiplayer interactions.
             </p>
-            <p><a href="https://github.com/" target="_blank" rel="noreferrer noopener">Overview</a></p>
-          </article>
+            <p>
+              <span class="pill">Python</span><span class="pill">Networking</span>
+              <span class="pill">ADTs</span><span class="pill">2023</span>
+            </p>
+            <p>
+              <a href="#">Repo (coming soon)</a> · <a href="#">Demo (coming soon)</a>
+            </p>
+          </article>   
+          <article class="card">
+          <h3>Smart Dungeons & Dragons — Embedded Game System</h3>
+          <p>
+            Interactive D&D-style game built on ESP32 devices, featuring real-time combat actions 
+            (dice rolls, attacks, shielding) across a distributed embedded network. 
+            Developed core gameplay logic and a SQL-backed database for managing player state, 
+            server communication, and synchronized team interactions.
+          </p>
+          <p>
+            <span class="pill">ESP32</span><span class="pill">C</span>
+            <span class="pill">SQL</span><span class="pill">2022</span>
+          </p>
+          <p>
+            <a href="#">Repo (coming soon)</a>
+          </p>
+        </article>
+              
         </div>
     </div>
     <div class="meta" data-title="projects.fs — selected work"></div>
