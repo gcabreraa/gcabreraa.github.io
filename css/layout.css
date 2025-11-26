@@ -1006,10 +1006,8 @@ p{ margin:.3rem 0 .9rem; }
 .contact-node__icon img {
   width: 42px;
   height: 42px;
-  border-radius: 50%;
-  border: 2px solid rgba(255,255,255,.9);
-  box-shadow: inset 0 0 6px rgba(0,0,0,.3);
   image-rendering: pixelated;
+  translate : 0% 10%;
 }
 
 .contact-node__label {
