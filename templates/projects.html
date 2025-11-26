@@ -12,7 +12,7 @@
             Low-power environmental sensing unit for mapping urban heat across MIT's campus.
           </p>
             <details class="panel-more">
-              <summary>[..]</summary>
+              <summary>Read more</summary>
             <p>Built around an ESP32-C3 with custom PCBs for power management, sensing peripherals (SHT4x + VEML7700), and field deployment. The node performs multi-stage buffering (RTC → flash) to survive outages, and schedules LoRa/Wi-Fi upload windows to minimize energy usage. An e-ink display provides an accessible community interface, showing local temperature, battery status, and a QR code that links to live telemetry via a custom backend dashboard.</p>
             <p><strong>Role:</strong> Firmware and communications implementation.</p>
             </details>
@@ -43,7 +43,7 @@
           <p class="panel-preview">
             Designed a fault-tolerant extension of NASA's SolarNet spec for Earth-Moon-Mars communication
             <details class="panel-more">
-              <summary>[..]</summary>
+              <summary>Read more</summary>
             <p>The system integrates persistent bundle storage, adaptive routing, and selective retransmission to handle long delays and intermittent connectivity in space.</p>
             <p><strong>Role:</strong> Co-designed node-level communication logic and distributed storage layout; evaluated link constraints across use cases, authored reliability + performance trade-offs in the final design.</p>
             </details>
@@ -74,7 +74,7 @@
           <p class="panel-preview">
             Piano Tiles-style rhythm game implemented entirely on an FPGA.
             <details class="panel-more">
-              <summary>[..]</summary>
+              <summary>Read more</summary>
             <p>An SD-card reader streams MIDI/WAV data into audio-processing pipelines, which map notes to frequencies and drive both audio synthesis and a 10×10 visual grid. The display module renders falling tiles over HDMI using BRAM-backed line buffers, while the game logic checks keyboard hits against the bottom row in real time.</p>
             <p><strong>Role:</strong> Designed the node architecture and SystemVerilog modules for storage layout, SD-card I/O, and tile rendering with emphasis on timing, buffering, and clean interfaces.</p>
             </details>
@@ -105,7 +105,7 @@
           <p class="panel-preview">
             Piano Tiles on a PSoC 5LP with a 240x320 TFT, wavetable audio, and SPI-rendered tiles.
             <details class="panel-more">
-              <summary>[..]</summary>
+              <summary>Read more</summary>
             <p>Interrupt-driven buttons and an on-chip VDAC synthesizer run inside a SysTick ISR while emWin graphics render falling tiles via SPI.</p>
             </details>
           <p class="panel-meta">
@@ -134,7 +134,7 @@
           <p class="panel-preview">
             Network-based logic puzzle with a custom GUI for interactive gameplay.
             <details class="panel-more">
-              <summary>[..]</summary>
+              <summary>Read more</summary>
             <p>Designed abstract data types to represent puzzle rules, board state, and player actions so validation stayed fast and synchronized across clients.</p>
             </details>
           <p class="panel-meta">
@@ -163,7 +163,7 @@
           <p class="panel-preview">
             Interactive D&D-style experience built on ESP32 devices with real-time combat actions.
             <details class="panel-more">
-              <summary>[..]</summary>
+              <summary>Read more</summary>
             <p>The device handles dice rolls, attacks, and shielding while a SQL-backed coordinator syncs player states, server messages, and team interactions with an LED map of the game.</p>
             </details>
           <p class="panel-meta">
