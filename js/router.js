@@ -4,6 +4,7 @@
 const routes = {
   '#home'      : 'templates/home.html',
   '#about'     : 'templates/about.html',
+  '#education' : 'templates/education.html',
   '#projects'  : 'templates/projects.html',
   '#experience': 'templates/experience.html',
   '#contact'   : 'templates/contact.html'
