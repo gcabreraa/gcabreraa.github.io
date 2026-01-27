@@ -253,6 +253,8 @@ function openProjectModal(projectKey) {
           <span class="modal-meta-badge">📅 ${project.year}</span>
           <span class="modal-meta-badge">💡 ${project.tagline}</span>
         </div>
+        ${otherLinks ? `<div class="modal-links modal-links--inline">${otherLinks}</div>` : ''}
+        <p class="modal-scroll-hint">Scroll down for slides and demo videos.</p>
       </div>
     </div>
     
@@ -276,8 +278,6 @@ function openProjectModal(projectKey) {
     </div>
     
     ${embedsHTML}
-    
-    ${otherLinks ? `<div class="modal-links">${otherLinks}</div>` : ''}
   `;
   
   overlay.classList.add('active');
