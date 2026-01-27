@@ -340,14 +340,44 @@ p{ margin:.3rem 0 .9rem; }
 .side-icon.active .side-label{ text-decoration:underline; }
 .side-icon.active .imgwrap{ outline:2px solid var(--link); outline-offset:2px; }
 
-/* Background â€œwindowsâ€ behind the app */
+/* Background */
+
 .decor{ z-index:0; opacity:.95; }
 
 .bg-window{
   position:absolute;
   border-radius:0;
-  opacity:1;                          /* faint â€” looks truly â€œbehindâ€ */
+  opacity:1;                          
   filter: saturate(0.95);
+}
+
+.bg-window--cd .bg-body{
+  position: relative;
+}
+
+.cd-player__button{
+  position: absolute;
+  inset: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.cd-player__button::after{
+  content: "PLAY";
+  position: absolute;
+  right: 14%;
+  bottom: 18%;
+  padding: 2px 6px;
+  font: 700 12px/1 'LeviWindows','Press Start 2P',monospace;
+  color: #0b3b3e;
+  background: rgba(255,255,255,.65);
+  border: 1px solid rgba(0,0,0,.4);
+  box-shadow: 1px 1px 0 rgba(0,0,0,.35);
+}
+
+.bg-window--cd.is-playing .cd-player__button::after{
+  content: "PAUSE";
 }
 
 /* Taskbar */

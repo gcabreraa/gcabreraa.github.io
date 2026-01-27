@@ -56,8 +56,14 @@
       <div class="bg-window" style="right: 60px; bottom: 80px; width: 360px; z-index:1;">
       <div class="bg-body"><img src="./backgrounds/card-game.jpg" alt="Retro card game"/></div>
     </div>
-    <div class="bg-window" style="left: 120px; top: 120px; width: 420px; z-index:1;">
-      <div class="bg-body"><img src="./backgrounds/cd-player.png" alt="Retro CD player"/></div>
+    <div class="bg-window bg-window--cd" style="left: 120px; top: 120px; width: 420px; z-index:1;">
+      <div class="bg-body">
+        <img src="./backgrounds/cd-player.png" alt="Retro CD player"/>
+        <button class="cd-player__button" aria-label="Play audio" aria-pressed="false"></button>
+      </div>
+      <audio id="bg-audio" preload="none">
+        <source src="audio/track.mp3" type="audio/mpeg">
+      </audio>
     </div>
   </div>
 
@@ -126,6 +132,7 @@
     </div>
   </div>
 
+  <script src="js/audio-player.js" defer></script>
   <script src="js/router.js" defer></script>
 
 </body>
