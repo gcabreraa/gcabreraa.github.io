@@ -16,7 +16,7 @@
   --bg:#061517;
   --panel:#132629;
   --panel-2:#0f1f22;
-  --text:#f8fff9;
+  --text:#e5eae6;
   --muted:#d4ffe2;
   --accent:#78f8ff;
   --accent-2:#ffd966;
@@ -26,7 +26,7 @@
   --tab-bot:#0f3f46;
   --xp-border:#2dd2c7;
   --xp-border-inner:#093f42;
-  --xp-shadow:#021d1f;
+  --xp-shadow:#50e2e4;
   --xp-header-start:#1f666b;
   --xp-header-end:#0f3b3f;
   --xp-header-text:#eaffe8;
@@ -37,7 +37,7 @@
   --xp-meta-bg:#0a2d31;
   --xp-meta-border:#1a8f87;
   --xp-meta-text:#d6fff4;
-  --proj-mint-bg:#0a2a29;
+  --proj-mint-bg:#09817d;
   --proj-mint-bar:#12504a;
   --proj-rose-bg:#2b1121;
   --proj-rose-bar:#501a33;
@@ -100,3 +100,4 @@ body.theme-pixel{
 body.theme-accessible{
   background:#041013;
 }
+

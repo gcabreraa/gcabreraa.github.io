@@ -70,7 +70,11 @@ async function render(hash) {
     if (taskItem) taskItem.textContent = title;  // update taskbar
     document.title = `Giuliana Cabrera — ${title.replace(/ — /g, ' · ')}`;
     setActiveSideIcon(hash);
-    appContent.scrollTop = 0;                    // reset scroll inside window
+    appContent.scrollTop = 0;   
+    // Reinitialize project modals if on projects page
+    if (hash === '#projects' && window.initProjectModals) {
+      setTimeout(() => window.initProjectModals(), 100);
+    }                 // reset scroll inside window
   } catch (err) {
     appContent.innerHTML = `<div class="content"><p>Failed to load: <code>${route}</code></p><pre class="terminal">${String(err)}</pre></div>`;
     appTitle.textContent = 'error — load failed';
