@@ -809,6 +809,16 @@ p{ margin:.3rem 0 .9rem; }
   font-size:1.1rem;
 }
 
+.panel-art{
+  flex: 0 0 120px;
+}
+
+.panel-art img{
+  display:block;
+  object-fit: cover;
+  object-position: center;
+}
+
 .project-panel:hover {
   transform: translateY(-2px);
   box-shadow:

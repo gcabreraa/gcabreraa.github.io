@@ -3,7 +3,7 @@
 // Project data structure - update with your actual project details
 const projectData = {
   'mitos': {
-    title: 'MITOS ? Campus Heat Monitor',
+    title: 'MITOS — Campus Heat Monitor',
     year: '2025',
     tagline: 'Low-power environmental sensing unit for mapping urban heat across MIT\'s campus.',
     description: `
@@ -19,12 +19,12 @@ const projectData = {
     ],
     links: {
       repo: 'https://github.com/gcabreraa/mitosis-project-2025',
-      slides: 'https://docs.google.com/presentation/d/18ddx2oT0A9gGHlHaXcvTStzuUjTPh3UD1AqeYcPpL7Q/edit?usp=drive_link'
+      slides: 'https://docs.google.com/presentation/d/e/2PACX-1vSROUYRuoknlG-PKkBHGipFYBEoYiXdwO3iBNWTvkYM9qU_BR4nNJQprFsLecuYcsGSJ81cVRwHAE-v/pubembed?start=false&loop=false&delayms=3000'
     },
     image: 'images/mitos-preview.png'
   },
   'astra': {
-    title: 'ASTRA ? Networking Architecture',
+    title: 'ASTRA — Networking Architecture',
     year: '2025',
     tagline: 'Designed a fault-tolerant extension of NASA\'s SolarNet spec for Earth-Moon-Mars communication.',
     description: `
@@ -45,7 +45,7 @@ const projectData = {
     image: 'images/astra-preview.png'
   },
   'grid-thym': {
-    title: 'Grid-thym ? FPGA Music Game',
+    title: 'Grid-thym — FPGA Music Game',
     year: '2024',
     tagline: 'Piano Tiles-style rhythm game implemented entirely on an FPGA.',
     description: `
@@ -60,12 +60,13 @@ const projectData = {
       'Timing-accurate audio synthesis and buffering'
     ],
     links: {
-      repo: 'https://github.mit.edu/rbchavez/Gridthym'
+      repo: 'https://github.com/gcabreraa/gridthym-2024',
+      slides: 'https://docs.google.com/presentation/d/e/2PACX-1vTlOF41Ey0YdQQvLNEcL2EDpqz4SkLlicganNg1r-cSfHPJlBbyCT7vQx80fVtobM2DV2sk7gSYWnjx/pubembed?start=false&loop=false&delayms=3000'
     },
     image: 'assets/projects/grid-thym-thumb.jpg'
   },
   'piano-tiles': {
-    title: 'Piano Tiles ? PSoC Edition',
+    title: 'Piano Tiles — PSoC Edition',
     year: '2024',
     tagline: 'Piano Tiles on a PSoC 5LP with a 240x320 TFT, wavetable audio, and SPI-rendered tiles.',
     description: `
@@ -83,7 +84,7 @@ const projectData = {
     image: 'assets/projects/piano-tiles-thumb.jpg'
   },
   'star-battle': {
-    title: 'Star Battle ? Network Puzzle',
+    title: 'Star Battle — Network Puzzle',
     year: '2023',
     tagline: 'Network-based logic puzzle with a custom GUI for interactive gameplay.',
     description: `
@@ -100,7 +101,7 @@ const projectData = {
     image: 'assets/projects/star-battle-thumb.jpg'
   },
   'smart-dnd': {
-    title: 'Smart Dungeons & Dragons ? ESP32 Game',
+    title: 'Smart Dungeons & Dragons — ESP32 Game',
     year: '2022',
     tagline: 'Interactive D&D-style experience built on ESP32 devices with real-time combat actions.',
     description: `
@@ -194,7 +195,7 @@ function openProjectModal(projectKey) {
     embedsHTML += `
       <div class="modal-embed">
         <h3>Slides</h3>
-        <iframe src="${project.links.slides}" allowfullscreen></iframe>
+        <iframe src="${project.links.slides}" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
       </div>
     `;
   }
